@@ -170,60 +170,59 @@ function($, str, ModalFactory, Alertc, Log) {
 
                 var isRankingShown = false;
                 var $rankingbutton = $(this);
-                var $tabranking = $blockcontent.find('.tabranking');
 
-                if ($tabranking.length > 0) {
-                    $rankingbutton.on('click', function(e) {
-                        e.stopPropagation();
+                $rankingbutton.on('click', function(e) {
+                    e.stopPropagation();
 
-                        if (!isRankingShown) {
+                    if (!isRankingShown) {
 
-                            $($tabranking[0]).addClass('showranking');
-                            $rankingbutton.addClass('activebtn');
-                            $rankingbutton.text(s['hideranking']);
+                        $blockcontent.find('.tab-topbysite').addClass('showranking');
+                        $rankingbutton.addClass('activebtn');
+                        $rankingbutton.text(s['hideranking']);
 
-                        } else {
-                            $blockcontent.find('.tabranking').removeClass('showranking');
-                            $rankingbutton.removeClass('activebtn');
-                            $rankingbutton.text(s['showranking']);
-                        }
+                    } else {
+                        $blockcontent.find('.tabranking').removeClass('showranking');
+                        $rankingbutton.removeClass('activebtn');
+                        $rankingbutton.text(s['showranking']);
+                    }
 
-                        $blockcontent.find('.closeludifica').on('click', function() {
+                    $blockcontent.find('.closeludifica').on('click', function() {
+                        $blockcontent.find('.showranking').removeClass('showranking');
+                        $blockcontent.find('.showrankingbutton').removeClass('activebtn');
+                        $blockcontent.find('.showrankingbutton').text(s['showranking']);
+                        isRankingShown = false;
+                    });
+
+                    isRankingShown = !isRankingShown;
+                });
+
+                $(document).on('click', function(e) {
+                    var container = $blockcontent.find('.tabranking');
+
+                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                        if (isRankingShown) {
                             $blockcontent.find('.showranking').removeClass('showranking');
                             $blockcontent.find('.showrankingbutton').removeClass('activebtn');
                             $blockcontent.find('.showrankingbutton').text(s['showranking']);
-                            isRankingShown = false;
-                        });
-
-                        isRankingShown = !isRankingShown;
-                    });
-
-                    $(document).on('click', function(e) {
-                        var container = $blockcontent.find('.tabranking');
-
-                        if (!container.is(e.target) && container.has(e.target).length === 0) {
-                            if (isRankingShown) {
-                                $blockcontent.find('.showranking').removeClass('showranking');
-                                $blockcontent.find('.showrankingbutton').removeClass('activebtn');
-                                $blockcontent.find('.showrankingbutton').text(s['showranking']);
-                            }
-                            isRankingShown = false;
                         }
-                    });
+                        isRankingShown = false;
+                    }
+                });
 
-                    $blockcontent.find('.shownexttop').on('click', function() {
-                        var currentVisible = null;
-                        $tabranking.each((index, onetab) => {
-                            var $onetab = $(onetab);
-                            if ($onetab.hasClass('showranking')) {
-                                currentVisible = index;
-                                $onetab.removeClass('showranking');
-                            }
-                        });
-                        let nextVisible = (currentVisible >= $tabranking.length - 1) ? 0 : currentVisible + 1;
-                        $($tabranking[nextVisible]).addClass('showranking');
-                    });
-                }
+                $blockcontent.find('.showtopbysite').on('click', function() {
+                    $blockcontent.find('.tabranking').removeClass('showranking');
+                    $blockcontent.find('.tab-topbysite').addClass('showranking');
+                });
+
+                $blockcontent.find('.showtopbycourse').on('click', function() {
+                    $blockcontent.find('.tabranking').removeClass('showranking');
+                    $blockcontent.find('.tab-topbycourse').addClass('showranking');
+                });
+
+                $blockcontent.find('.showlastmonth').on('click', function() {
+                    $blockcontent.find('.tabranking').removeClass('showranking');
+                    $blockcontent.find('.tab-lastmonth').addClass('showranking');
+                });
 
             });
 

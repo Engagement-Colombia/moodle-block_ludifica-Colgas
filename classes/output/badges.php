@@ -58,7 +58,7 @@ class badges implements renderable, templatable {
 
         // Get user badges only in profile tab.
 
-        $sitebadges = badges_get_badges(BADGE_TYPE_SITE);
+        $allbadges = badges_get_badges(BADGE_TYPE_SITE);
         $userbadges = badges_get_user_badges($player->general->userid, null);
         $badges = [];
         $userbadgesids = [];
@@ -75,17 +75,6 @@ class badges implements renderable, templatable {
                 $badge->year = date('Y', $badge->timecreated);
                 $badge->month = date('m', $badge->timecreated);
                 $badge->thumbnail = print_badge_image($badgeinstance, $badgeinstance->get_context(), 'normal');
-
-                if ((int)$badge->type == BADGE_TYPE_COURSE) {
-                    $badgecourse = $DB->get_record('course', ['id' => $badge->courseid]);
-                    $badge->fromcourse = true;
-                    $badge->coursename = $badgecourse->fullname;
-
-                    if ($badgecourse->visible) {
-                        $badge->courseurl = (string)(new \moodle_url('/badges/view.php', ['id' => $badge->courseid, 'type' => 2]));
-                    }
-                }
-
                 $badges[] = $badge;
                 $userbadgesids[] = $badge->id;
             }
@@ -93,7 +82,7 @@ class badges implements renderable, templatable {
         // End Get user badges.
 
         // Get unavialable badges.
-        foreach ($sitebadges as $badge) {
+        foreach ($allbadges as $badge) {
 
             $badge->thumbnail = $badge->thumbnail = print_badge_image($badge, $badge->get_context(), 'normal');
 

@@ -1,5 +1,5 @@
 .block_ludifica {
-    background: url('pix/bg1_ludifica.png') no-repeat center center;
+    background: url('https://boa.escuelacorporativa.com/api/c/engagement/resources/MzdEODBGNEItRUVGRi00N0YxLThDMEQtM0MwMjYxRUFDQkY2QGJvYS51ZGVhLmVkdS5jby9jb250ZW50L0NPTkVDVEEvYmcxX2x1ZGlmaWNhLmpwZw==/!/') no-repeat center center;
     background-color: #383a70;
     min-height: 650px;
     background-size: cover;
@@ -794,15 +794,8 @@
 }
 
 .block_ludifica #badges-list .unavailable .card {
+    pointer-events: none;
     background: none;
-    animation: none;
-    transform: none;
-    box-shadow: unset;
-}
-
-.block_ludifica #badges-list .unavailable .card:hover .card-header,
-.block_ludifica #badges-list .unavailable .card:hover .info-box {
-    color: #fff;
 }
 
 .block_ludifica #badges-list .unavailable .openshare {
@@ -815,11 +808,6 @@
     color: #f6d052;
     background: none;
     border: none;
-}
-
-.block_ludifica #badges-list .courseinfo {
-    text-align: center;
-    padding: 5px;
 }
 
 .block_ludifica #badges-list .card:hover .card-header,
