@@ -91,10 +91,10 @@
 
 .block_ludifica .showrankingbutton {
     font-size: 20px;
-    background-color: #3db1d1;
+    background: linear-gradient(white, #9d9b9b);
     box-shadow: 0 0 16px 0 rgb(0 0 0 / 50%);
     border: none;
-    color: #2d3351;
+    color: #004282;
 }
 
 .block_ludifica .avatar-box > div:first-child {
@@ -116,11 +116,12 @@
 .ludifica_stats > h2,
 .ludifica_stats > div {
     margin-top: 7px;
-    background-color: #2d3351aa;
+    background-color: #ffffff;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 16px 0 rgb(0 0 0 / 50%);
     font-weight: bold;
+    background: linear-gradient(white, #9d9b9b);
 }
 
 .ludifica_stats > h2 {
@@ -143,7 +144,7 @@
 .ludifica_stats > h2 a,
 .ludifica_stats > div {
     /* stylelint-disable-next-line declaration-no-important */
-    color: #3db1d1 !important;
+    color: #004282 !important;
 }
 
 .ludifica_stats > div {
@@ -153,11 +154,11 @@
 
 .block_ludifica .showhelpsbutton {
     margin: 10px 0;
-    color: #2d3351;
-    background-color: #3db1d1;
+    color: #004282;
+    background: linear-gradient(white, #9d9b9b);
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
 }
@@ -177,7 +178,7 @@
 
 .block_ludifica .ludifica_help,
 .ludifica_stats > h2 a .icon {
-    color: #004282;
+    color: #fff;
 }
 
 .block_ludifica .avatar-box {
@@ -366,9 +367,9 @@
 }
 
 .block_ludifica .userbadges-ludifica {
-    background: linear-gradient(0deg, rgba(45, 51, 81, 1) 24%, rgba(45, 51, 81, 0) 100%);
+    background: linear-gradient(0deg, rgb(255 255 255 / 68%) 24%, rgba(45, 51, 81, 0) 100%);
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     padding: 35px 0 15px 0;
     border-radius: 0.5rem;
     width: 100%;
@@ -572,7 +573,7 @@
     box-shadow: 0 0 0 0 #f6d052;
     filter: contrast(100%) brightness(100%);
     background: none;
-    border: 1px solid #eaaf0a;
+    /* border: 1px solid #eaaf0a; */
 }
 
 #page-blocks-ludifica-avatars #avatars-list .userhas .card {
@@ -592,9 +593,9 @@
 }
 
 #page-blocks-ludifica-avatars #avatars-list .oneavatar:hover .card {
-    box-shadow: 0 0 20px 0 #f6d052;
+    box-shadow: 0 0 20px 0 #ffffff;
     animation: hover-animation 0.3s forwards;
-    background-color: #f6d052;
+    background-color: #ffffff;
 }
 
 #page-blocks-ludifica-avatars #avatars-list .oneavatar:hover .card-header {
@@ -625,7 +626,7 @@
 }
 
 #page-blocks-ludifica-avatars #avatars-list .oneavatar .card .card-header {
-    color: #f6d052;
+    color: #ffffff;
     text-align: center;
     background: none;
     border: none;
@@ -633,7 +634,7 @@
 
 #page-blocks-ludifica-avatars #avatars-list .oneavatar .btn-primary,
 #page-blocks-ludifica-tickets #tickets-list .oneticket .btn-primary {
-    background-color: #2d3351;
+    background-color: #002657;
     border: 1px solid #3db1d1;
     color: #fff;
     margin: 5px;
@@ -768,7 +769,7 @@
 .block_ludifica #tickets-list .card:hover .info-box strong,
 .block_ludifica .rankingheader + p,
 .block_ludifica .notavailableyet {
-    color: #fff;
+    color: #004282;
 }
 
 .block_ludifica p {
