@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/lib/badgeslib.php');
 
+use context_course;
 use renderable;
 use renderer_base;
 use templatable;
@@ -75,13 +76,27 @@ class main implements renderable, templatable {
         $icons = \block_ludifica\controller::get_views_icons();
 
         $showtabs = [];
-        foreach ($this->tabs as $k => $tab) {
+        $customranking = [];
+        foreach ($this->tabs as $tab) {
+
             $one = new \stdClass();
-            $one->title = get_string('tabtitle_' . $tab, 'block_ludifica');
-            $one->key = $tab;
-            $one->icon = $output->image_icon($icons[$tab], $one->title);
-            $one->state = $k == 0 ? 'active' : '';
+
+            // Object means that it's a custom tab.
+            if (is_object($tab)) {
+                $one->title = $tab->title;
+                $one->key = $tab->key;
+                $one->icon = $output->image_icon($tab->icon, $one->title);
+                $customranking[] = $tab;
+            } else {
+                $one->title = get_string('tabtitle_' . $tab, 'block_ludifica');
+                $one->key = $tab;
+                $one->icon = $output->image_icon($icons[$tab], $one->title);
+            }
             $showtabs[] = $one;
+        }
+
+        if (count($showtabs) > 0) {
+            $showtabs[0]->active = 'active';
         }
 
         $activetab = false;
@@ -161,7 +176,8 @@ class main implements renderable, templatable {
 
         if (in_array('topbycourse', $this->tabs) ||
             in_array('topbysite', $this->tabs) ||
-            in_array('lastmonth', $this->tabs)) {
+            in_array('lastmonth', $this->tabs) ||
+            count($customranking) > 0) {
 
             $hasranking = true;
         }
@@ -240,9 +256,16 @@ class main implements renderable, templatable {
 
                 if ($badge->status == '3') {
 
+                    if ($badge->courseid) {
+                        $instancecontext = \context_course::instance($badge->courseid);
+                        $source = $instancecontext->id;
+                    } else {
+                        $source = SITEID;
+                    }
+
                     $badge->url = urldecode((string)(new \moodle_url('/badges/badge.php', ['hash' => $badge->uniquehash])));
-                    $badge->thumbnail = \moodle_url::make_pluginfile_url(SITEID,
-                    'badges', 'badgeimage', $badge->id, '/', 'f3', false);
+                    $badge->thumbnail = \moodle_url::make_pluginfile_url($source,
+                                                                            'badges', 'badgeimage', $badge->id, '/', 'f3', false);
 
                     $badges[] = $badge;
                 }
@@ -303,6 +326,28 @@ class main implements renderable, templatable {
             $defaultvariables['hasrowslastmonth'] = count($defaultvariables['lastmonth']) > 0;
             $defaultvariables['lastmonthstate'] = !$activetab ? 'active' : '';
             $activetab = true;
+        }
+
+        if (count($customranking) > 0) {
+            $defaultvariables['hascustomranking'] = true;
+
+            $defaultvariables['customranking'] = [];
+            foreach ($customranking as $custom) {
+                $rankingrows = array_values(\block_ludifica\controller::get_customranking($custom, $COURSE->id));
+                $defaultvariables['customranking'][] = (object) [
+                    'title' => empty($custom->value) ? get_string('ranking_custom_empty', 'block_ludifica', $custom->title) :
+                                                    get_string('ranking_custom_value', 'block_ludifica', (object)[
+                                                        'type' => $custom->title,
+                                                        'value' => $custom->labeledvalue,
+                                                    ]),
+                    'key' => $custom->key,
+                    'rows' => $rankingrows,
+                    'hasrows' => count($rankingrows),
+                    'state' => !$activetab ? 'active' : '',
+                ];
+                $activetab = true;
+            }
+
         }
 
         if (in_array('dynamichelps', $this->tabs)) {

@@ -177,7 +177,7 @@
 
 .block_ludifica .ludifica_help,
 .ludifica_stats > h2 a .icon {
-    color: #004282;
+    color: #fff;
 }
 
 .block_ludifica .avatar-box {
@@ -187,7 +187,6 @@
 }
 
 .ludificalevel {
-    display: none;
     background-color: #2d3351cc;
     color: #3db1d1;
     position: absolute;
@@ -704,9 +703,8 @@
 
 .block_ludifica #tickets-list .card {
     background: none;
-    border: 1px solid #ffffff36;
-    color: #002657;
-    background-color: #ffffff96;
+    border: 1px solid #3db1d1;
+    color: #fff;
     box-shadow: 0 0 0 0 #3db1d1;
     filter: contrast(100%) brightness(100%);
     transform: perspective(1px);
@@ -724,7 +722,7 @@
 .block_ludifica #tickets-list .card-header {
     font-size: 19px;
     text-align: center;
-    color: #002657;
+    color: #3db1d1;
     background: none;
     border: none;
 }
@@ -735,7 +733,7 @@
 }
 
 .block_ludifica #tickets-list .moreinfo-ticket {
-    color: #002657;
+    color: #3db1d1;
     position: absolute;
     right: 0;
 }
@@ -762,7 +760,7 @@
 }
 
 .block_ludifica #tickets-list .card .info-box strong {
-    color: #002657;
+    color: #e59428;
 }
 
 .block_ludifica #tickets-list .card:hover .info-box strong,
